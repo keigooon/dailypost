@@ -9,6 +9,12 @@
     <th>投稿内容</th>
     <td><%= @post.content %></td>
   </tr>
+  <% if @post.image %> 
+    <tr>
+      <th>投稿画像</th>
+      <td><%= image_tag @post.image.url %></td>
+    </tr>
+  <% end %>
 </table>
 <% if current_user == @post.user %>
   <%= link_to "このタスクを編集する", edit_post_path(@post), class: "btn btn-light" %>
