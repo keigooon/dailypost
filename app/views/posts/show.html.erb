@@ -1,0 +1,16 @@
+<h1>投稿詳細ページ</h1>
+
+<table class="table table-striped">
+  <tr>
+    <th>ユーザ</th>
+    <td><%= @post.user.name %></td>
+  </tr>
+  <tr>
+    <th>投稿内容</th>
+    <td><%= @post.content %></td>
+  </tr>
+</table>
+<% if current_user == @post.user %>
+  <%= link_to "このタスクを編集する", edit_post_path(@post), class: "btn btn-light" %>
+  <%= link_to "このタスクを削除する", @post, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-danger" %>
+<% end %>
