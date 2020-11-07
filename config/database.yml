@@ -48,7 +48,9 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
   database: dailyposts_production
   username: dailyposts
   password: <%= ENV['DAILYPOSTS_DATABASE_PASSWORD'] %>
