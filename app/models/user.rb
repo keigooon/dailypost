@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_secure_password
   
   has_many :posts
+  has_many :likes, dependent: :destroy
+  has_many :like_posts, through: :likes, source: :post
   
   has_many :relationships
   has_many :followings, through: :relationships, source: :follow
@@ -28,5 +30,18 @@ class User < ApplicationRecord
   
   def following?(other_user)
     self.followings.include?(other_user)
+  end
+  
+  def like(a_post)
+    self.likes.find_or_create_by(post_id: a_post.id)
+  end
+  
+  def remove_like(a_post)
+    like = self.likes.find_by(post_id: a_post.id)
+    like.destroy if like
+  end
+  
+  def like?(a_post)
+    self.like_posts.include?(a_post)
   end
 end
