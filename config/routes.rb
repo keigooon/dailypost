@@ -6,7 +6,14 @@ Rails.application.routes.draw do
   delete "logout", to: "sessions#destroy"
 
   get "signup", to: "users#new"
-  resources :users, only: [:show, :create]
-  
+  resources :users, only: [:show, :create] do
+    member do
+      get :followings
+      get :followers
+    end
+  end
+    
   resources :posts
+  
+  resources :relationships, only: [:create, :destroy]
 end
