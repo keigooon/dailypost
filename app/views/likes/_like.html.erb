@@ -1,0 +1,11 @@
+<% if current_user.like?(post) %>
+  <%= form_with(model: current_user.likes.find_by(post_id: post.id), remote: true, method: :delete) do |f| %>
+    <%= hidden_field_tag :post_id, post.id %>
+    <%= f.submit 'Unlike', class: 'btn btn-danger' %>
+  <% end %>
+<% else %>
+  <%= form_with(model: current_user.likes.build, remote: true) do |f| %>
+    <%= hidden_field_tag :post_id, post.id %>
+    <%= f.submit 'Like', class: 'btn btn-primary' %>
+  <% end %>
+<% end %>
