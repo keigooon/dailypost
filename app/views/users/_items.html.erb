@@ -1,6 +1,37 @@
 <ul class="nav nav-tabs nav-justified mb-3">
-  <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">Posts <span class="badge badge-secondary"><%= @count_posts %></span></a></li>
-  <li class="nav-item"><a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>">Follows <span class="badge badge-secondary"><%= @count_followings %></span></a></li>
-  <li class="nav-item"><a href="<%= followers_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followers_user_path(@user)) %>">Followers <span class="badge badge-secondary"><%= @count_followers %></span></a></li>
-  <li class="nav-item"><a href="<%= like_posts_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(like_posts_user_path(@user)) %>">Likes <span class="badge badge-secondary"><%= @count_like_posts %></span></a></li>
+  <li class="nav-item">
+    <a href="#posts" class="nav-link active" data-toggle="tab">
+      posts<span class="badge badge-secondary"><%= @count_posts %></span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="#follows" class="nav-link" data-toggle="tab">
+      follows<span class="badge badge-secondary"><%= @count_followings %></span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="#followers" class="nav-link" data-toggle="tab">
+      followers<span class="badge badge-secondary follower-counts"><%= @count_followers %></span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="#likes" class="nav-link" data-toggle="tab">
+     likes<span class="badge badge-secondary"><%= @count_like_posts %></span>
+    </a>
+  </li>
 </ul>
+
+<div class="tab-content">
+  <div id="posts" class="tab-pane active">
+    <%= render 'posts/posts', posts: @posts %>
+  </div>
+  <div id="follows" class="tab-pane">
+    <%= render 'users', users: @followings %>
+  </div>
+  <div id="followers" class="tab-pane">
+    <%= render 'users', users: @followers %>
+  </div>
+  <div id="likes" class="tab-pane">
+    <%= render 'posts/posts', posts: @like_posts %>
+  </div>
+</div>

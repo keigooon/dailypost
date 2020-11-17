@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:show, :followings, :followers, :like_posts]
+  before_action :require_user_logged_in, only: [:show]
 
  
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.order(id: :desc).page(params[:page])
+    @followings = @user.followings.page(params[:page])
+    @followers = @user.followers.page(params[:page])
+    @like_posts = @user.like_posts.page(params[:page])
     counts_user(@user)
   end
 
@@ -21,24 +24,6 @@ class UsersController < ApplicationController
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
       render :new
     end
-  end
-  
-  def followings
-    @user = User.find(params[:id])
-    @followings = @user.followings.page(params[:page])
-    counts_user(@user)
-  end
-  
-  def followers
-    @user = User.find(params[:id])
-    @followers = @user.followers.page(params[:page])
-    counts_user(@user)
-  end
-  
-  def like_posts
-    @user = User.find(params[:id])
-    @posts = @user.like_posts.page(params[:page])
-    counts_user(@user)
   end
   
   private

@@ -4,11 +4,13 @@ class RelationshipsController < ApplicationController
   def create
     @user = User.find(params[:follow_id])
     current_user.follow(@user)
+    @followers = @user.followers.page(params[:page])
   end
   
   def destroy
     @user = User.find(params[:follow_id])
     current_user.unfollow(@user)
+    @followers = @user.followers.page(params[:page])
   end
   
   
