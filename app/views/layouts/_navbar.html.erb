@@ -1,6 +1,9 @@
 <header class="mb-4">
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Dailyposts</a>
+  <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-secondary">
+    <a class="navbar-brand" href="/">
+      <i class="fas fa-feather-alt"></i>
+      Dailyposts
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,18 +11,46 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
         <% if logged_in? %>
-          <li class="nav-item"><%= link_to '投稿する', new_post_path, class: 'nav-link' %></li>
+          <li class="nav-item">
+            <%= link_to new_post_path, class: 'nav-link' do %>
+              <i class="fab fa-envira"></i>
+              投稿する
+            <% end %>
+          </li>
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+              <i class="fas fa-user"></i>
+              <%= current_user.name %>
+            </a>
             <ul class="dropdown-menu dropdown-menu-right">
-              <li class="dropdown-item"><%= link_to 'プロフィール', user_path(current_user) %></li>
+              <li class="dropdown-item">
+                <%= link_to user_path(current_user) do %>
+                  <i class="fas fa-portrait"></i>
+                  プロフィール
+                <% end %>
+              </li>
               <li class="dropdown-divider"></li>
-              <li class="dropdown-item"><%= link_to 'ログアウト', logout_path, method: :delete %></li>
+              <li class="dropdown-item">
+                <%= link_to logout_path, method: :delete do %>
+                  <i class="fas fa-sign-out-alt"></i>
+                  ログアウト
+                <% end %>
+              </li>
             </ul>
           </li>
         <% else %>
-          <li class="nav-item"><%= link_to 'ユーザ登録', signup_path, class: 'nav-link' %></li>
-          <li class="nav-item"><%= link_to 'ログイン', login_path, class: 'nav-link' %></li>
+          <li class="nav-item">
+            <%= link_to signup_path, class: 'nav-link' do %>
+              <i class="fas fa-user-plus"></i>
+              登録
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to login_path, class: 'nav-link' do %>
+              <i class="fas fa-sign-in-alt"></i>
+              ログイン
+            <% end %>
+          </li>
         <% end %>
       </ul>
     </div>

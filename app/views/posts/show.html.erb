@@ -9,7 +9,7 @@
     <th>投稿内容</th>
     <td><%= @post.content %></td>
   </tr>
-  <% if @post.image %> 
+  <% if @post.image? %> 
     <tr>
       <th>投稿画像</th>
       <td><%= image_tag @post.image.url %></td>
@@ -17,6 +17,12 @@
   <% end %>
 </table>
 <% if current_user == @post.user %>
-  <%= link_to "このタスクを編集する", edit_post_path(@post), class: "btn btn-light" %>
-  <%= link_to "このタスクを削除する", @post, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-danger" %>
+  <%= link_to edit_post_path(@post), class: "btn btn-light" do %>
+    <i class="far fa-edit"></i>
+    編集
+  <% end %>
+  <%= link_to @post, method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn btn-outline-danger" do %>
+    <i class="fas fa-trash"></i>
+    削除
+  <% end %>
 <% end %>
