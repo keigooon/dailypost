@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_09_060158) do
+ActiveRecord::Schema.define(version: 2020_11_18_064107) do
 
   create_table "likes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 2020_11_09_060158) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "profile_image"
+    t.string "profile"
   end
 
   add_foreign_key "likes", "posts"

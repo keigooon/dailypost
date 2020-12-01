@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_user_logged_in, only: [:show]
+  before_action :not_logged_in, only: [:new, :create, :edit, :update]
 
  
   def show
@@ -26,10 +27,36 @@ class UsersController < ApplicationController
     end
   end
   
+  def edit
+    @user = User.find_by(id: params[:id])
+  end
+  
+  def update
+    @user = User.find_by(id: params[:id])
+    if current_user == @user
+      image = params[:profile_image]
+      if image
+        #データベースに保存するファイル名はユーザーのid.jpgとする
+        @user.profile_image = "#{@user.id}.jpg"
+        File.binwrite("public/user_images/#{@user.profile_image}",image.read)
+      end
+      if @user.update(user_params)
+        flash[:success] = "ユーザ情報を編集しました"
+        redirect_to user_path
+      else
+        flash.now[:danger] = "ユーザ情報を編集できませんでした"
+        render :edit
+      end
+    else
+      redirect_to posts_path
+    end
+  end
+    
+  
   private
   
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :profile, :profile_image)
   end
   
 end

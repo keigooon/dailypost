@@ -18,7 +18,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     if @post.save
       flash[:success] = '投稿しました。'
-      redirect_to root_url
+      redirect_to posts_path
     else
       flash.now[:danger] = '投稿に失敗しました。'
       render :new
@@ -31,17 +31,17 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       flash[:success] = "投稿を編集しました"
-      redirect_to root_url
+      redirect_to posts_path
     else
       flash.now[:danger] = "投稿を編集できませんでした"
-      redirect_to :edit
+      render :edit
     end
   end
   
   def destroy
     @post.destroy
     flash[:success] = "投稿を削除しました"
-    redirect_to root_url
+    redirect_to posts_path
   end
   
   private
@@ -53,7 +53,7 @@ class PostsController < ApplicationController
   def correct_user
     @post = current_user.posts.find_by(id: params[:id])
     unless @post
-      redirect_to root_url
+      redirect_to posts_path
     end
   end
   

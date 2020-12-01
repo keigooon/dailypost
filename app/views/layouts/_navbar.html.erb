@@ -1,15 +1,15 @@
-<header class="mb-4">
+<header>
   <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-secondary">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="/posts">
       <i class="fas fa-feather-alt"></i>
       Dailyposts
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" >
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav " >
         <% if logged_in? %>
           <li class="nav-item">
             <%= link_to new_post_path, class: 'nav-link' do %>
@@ -29,7 +29,12 @@
                   プロフィール
                 <% end %>
               </li>
-              <li class="dropdown-divider"></li>
+              <li class="dropdown-item">
+                <%= link_to edit_user_path(current_user) do %>
+                  <i class="far fa-edit"></i>
+                  プロフィール編集
+                <% end %>
+              </li>
               <li class="dropdown-item">
                 <%= link_to logout_path, method: :delete do %>
                   <i class="fas fa-sign-out-alt"></i>
@@ -56,3 +61,5 @@
     </div>
   </nav>
 </header>
+
+

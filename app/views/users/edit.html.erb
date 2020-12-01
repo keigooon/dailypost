@@ -1,0 +1,34 @@
+<div class="text-center">
+  <h1>ユーザ情報</h1>
+</div>
+
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+
+    <%= form_with(model: @user, local: true) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+      <div class="form-group">
+        <%= f.label :name, '名前' %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email, 'メールアドレス' %>
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :profile, '自己紹介' %>
+        <%= f.text_area :profile, class: 'form-control' %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :profile_image, 'プロフィール画像' %>
+        <%= f.file_field :profile_image, class: 'form-control-file' %>
+      </div>
+
+      <%= f.submit '登録する', class: 'btn btn-primary btn-block mt-5' %>
+    <% end %>
+  </div>
+</div>

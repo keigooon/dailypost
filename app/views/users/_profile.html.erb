@@ -1,11 +1,21 @@
-<div class="card">
+<div class="card text-center">
   <div class="card-header">
-    <h3 class="card-title text-center"><%= user.name %></h3>
+   <h3 class="card-title"><%= user.name %></h3>
   </div>
-  <div class="card-body">
-    <img class="rounded img-fluid" src="<%= gravatar_url( user, { size: 500 }) %>" alt="">
+  <div class="card-image">
+    <figure class="image">
+      <% if user.profile_image? %>
+        <img class="rounded img-fluid " src= "<%= user.profile_image.url %>" alt="" %>
+      <% else %>
+        <img class="rounded img-fluid" src="/assets/default.png" alt="" %>
+      <% end %>
+    </figure>
   </div>
+  <hr>
+  <div class="pb-2" style="font-size:14px; font-weight:bold;">自己紹介</div>
+  <%= user.profile %>
 </div>
+
 <div id="follow_button">
   <%= render 'relationships/follow_button', user: user %>
 </div>
